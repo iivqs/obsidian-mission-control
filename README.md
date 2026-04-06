@@ -36,6 +36,12 @@ obsidian-mission-control eliminates both problems. Your vault is the persistent 
 
 ---
 
+## How It Works
+
+Run `/obsidian` at the start of any Claude Code session. Claude loads your active project's briefing — status, open tasks, last session summary — directly from your vault. From there, use `/obsidian log` to record decisions mid-session and `/obsidian wrap` to write a structured summary back to the vault when you're done.
+
+---
+
 ## Install
 
 **Step 1 — Install the MCP server globally:**

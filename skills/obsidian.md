@@ -12,19 +12,7 @@ triggers:
 
 # Obsidian Mission Control
 
-This skill connects Claude Code to your Obsidian vault bidirectionally. At the start of every session, your vault briefs Claude with project context, open tasks, and past decisions — automatically. As you work, Claude writes decisions and summaries back to your vault so nothing is ever lost between conversations.
-
-No copy-pasting context. No re-explaining your project. Your vault and Claude stay in sync.
-
----
-
-## Auto-Behavior
-
-When a session begins, Claude automatically calls `obsidian_start_session` to load your current project briefing from the vault — status, open tasks, last session date, and recent decisions. This happens silently in the background; you do not need to trigger it.
-
-When you use `/obsidian wrap` (or end the session naturally), Claude calls `obsidian_end_session` to write a structured summary back to your vault's Sessions/ folder and update the project note.
-
-You do not need to manage any of this manually. It just works.
+This skill connects Claude Code to your Obsidian vault bidirectionally. Your vault briefs Claude with project context, open tasks, and past decisions. Claude writes decisions and session summaries back to the vault so nothing is lost between conversations.
 
 ---
 
@@ -32,9 +20,9 @@ You do not need to manage any of this manually. It just works.
 
 ### /obsidian
 
-Show the current project briefing: status, open tasks, last session date, and recent decisions.
+Load and show the current project briefing: status, open tasks, last session date, and recent decisions.
 
-> Claude: call `obsidian_get_briefing` and format the result clearly. Show project name and status on the first line, then open tasks as a numbered list, then last session info and any logged decisions. Keep it scannable.
+> Claude: call `obsidian_start_session` for the default project (omit the project argument so the server picks the active/default one). If that fails because no default project is configured, call `obsidian_list_projects` and ask the user which project to load. Once a session is started, call `obsidian_get_briefing` and display the result clearly: project name and status on the first line, open tasks as a numbered list, then last session info. Keep it scannable.
 
 ---
 
@@ -80,13 +68,9 @@ End the current session: write a summary to your vault's Sessions/ folder and up
 
 ## Session Lifecycle
 
-The full loop runs automatically in the background:
-
-1. **Session starts** — `obsidian_start_session` loads your project context silently. Claude is already briefed before you type your first message.
-2. **You work** — as tasks are completed and decisions are made, Claude calls `obsidian_update_task` and `obsidian_log_decision` in the background to keep your vault current.
-3. **Session ends** — `/obsidian wrap` triggers `obsidian_end_session`, which writes a structured session note to `Sessions/` in your vault, updates the project's last-session date, and marks any completed tasks.
-
-Your vault accumulates a living history of every Claude session: what was decided, what was built, what is still open.
+1. **Session starts** — run `/obsidian` to load your project briefing. Claude reads your status, open tasks, and last session summary.
+2. **You work** — use `/obsidian log [decision]` to record key decisions mid-session. Use `/obsidian tasks` to review open work.
+3. **Session ends** — `/obsidian wrap` writes a structured session note to `Sessions/` in your vault and updates the project's last-session date.
 
 ---
 
@@ -126,4 +110,4 @@ npm install -g obsidian-mission-control
 }
 ```
 
-That is all. On your next Claude Code session, your vault will brief Claude automatically.
+Restart Claude Code, then run `/obsidian` at the start of any session to load your vault briefing.
