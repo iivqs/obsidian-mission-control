@@ -44,7 +44,15 @@ obsidian-mission-control eliminates both problems. Your vault is the persistent 
 npm install -g obsidian-mission-control
 ```
 
-**Step 2 — Add to your Claude Code settings** (`~/.claude/settings.json`):
+> **macOS/Linux:** If you get a permissions error, run with `sudo`:
+> ```bash
+> sudo npm install -g obsidian-mission-control
+> ```
+> Or fix npm permissions permanently: [npm docs on fixing permissions](https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally)
+
+**Step 2 — Register the MCP server with Claude Code** (`~/.claude/mcp.json`):
+
+Create or edit `~/.claude/mcp.json` (not `settings.json`):
 
 ```json
 {
@@ -53,6 +61,17 @@ npm install -g obsidian-mission-control
       "command": "obsidian-mission-control"
     }
   }
+}
+```
+
+**Step 3 — Configure your vault** (`~/.obsidian-mc.json`):
+
+```json
+{
+  "vaults": {
+    "main": "~/Documents/MyVault"
+  },
+  "defaultVault": "main"
 }
 ```
 
@@ -183,9 +202,7 @@ These tools are exposed over MCP and called automatically by Claude or via skill
 
 ## Skill Commands
 
-Install the companion skill to get `/obsidian` slash commands in Claude Code.
-
-Copy `skills/obsidian.md` from this repo to your Claude Code skills folder, then restart Claude Code.
+The companion skill is installed automatically when you run `npm install -g obsidian-mission-control`. After restarting Claude Code, `/obsidian` commands are available immediately.
 
 | Command | Description |
 |---------|-------------|
