@@ -98,7 +98,7 @@ Your vault accumulates a living history of every Claude session: what was decide
 npm install -g obsidian-mission-control
 ```
 
-**Step 2 — Add to Claude Code settings** (`~/.claude/settings.json`):
+**Step 2 — Register the MCP server** (`~/.claude/mcp.json`):
 
 ```json
 {
@@ -110,7 +110,7 @@ npm install -g obsidian-mission-control
 }
 ```
 
-**Step 3 — Configure your vaults** (`~/.obsidian-mc.json`):
+**Step 3 — Configure your vault** (`~/.obsidian-mc.json`):
 
 ```json
 {
