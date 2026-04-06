@@ -31,5 +31,10 @@
     "ts-node": "^10.0.0"
   },
   "keywords": ["obsidian", "claude", "mcp", "claude-code", "mission-control"],
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iivqs/obsidian-mission-control"
+  },
+  "homepage": "https://github.com/iivqs/obsidian-mission-control#readme"
 }
