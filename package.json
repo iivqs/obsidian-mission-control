@@ -1,0 +1,35 @@
+{
+  "name": "obsidian-mission-control",
+  "version": "0.1.0",
+  "description": "Turn your Obsidian vault into a mission control for Claude Code",
+  "main": "dist/server.js",
+  "bin": {
+    "obsidian-mission-control": "dist/server.js"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/server.ts",
+    "start": "node dist/server.js",
+    "postinstall": "node -e \"const fs=require('fs'),os=require('os'),path=require('path');const dest=path.join(os.homedir(),'.claude','skills','obsidian');fs.mkdirSync(dest,{recursive:true});try{fs.copyFileSync(path.join(__dirname,'skills','obsidian.md'),path.join(dest,'SKILL.md'));console.log('Obsidian skill installed to ~/.claude/skills/obsidian/');}catch(e){console.warn('Could not install skill:',e.message);}\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "gray-matter": "^4.0.3",
+    "glob": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.0.0"
+  },
+  "keywords": ["obsidian", "claude", "mcp", "claude-code", "mission-control"],
+  "license": "MIT"
+}
